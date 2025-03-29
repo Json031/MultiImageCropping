@@ -17,6 +17,9 @@ pod 'MultiImageCropping' # Full version with all features
 将Classes文件夹拽入项目中，OC项目还需要桥接
 Drag the Classes folder into the project, OC project still needs bridging
 
+https://github.com/user-attachments/assets/a9a8d441-4c50-4d03-89d8-063535480ee1
+
+
 ## 代码结构
 
 ### 1. 主要属性
