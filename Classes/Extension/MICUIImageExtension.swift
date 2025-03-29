@@ -98,4 +98,12 @@ extension UIImage {
         
         return image!
     }
+    
+    class func imageFromBundle(imgName: String) -> UIImage? {
+        if let bundleURL = Bundle.main.url(forResource: "MultiImageCroppingResources", withExtension: "bundle"),
+           let resourceBundle = Bundle(url: bundleURL) {
+            return UIImage(named: imgName, in: resourceBundle, compatibleWith: nil)
+        }
+        return nil
+    }
 }

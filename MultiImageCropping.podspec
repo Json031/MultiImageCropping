@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "MultiImageCropping"
-  spec.version      = "1.0.5"
+  spec.version      = "1.0.6"
   spec.summary      = "A tool used for cropping multiple images."
 
   # This description is used to generate tags and improve search results.
@@ -93,9 +93,15 @@ MicMultiImageCropping是一个用于多张图片裁剪的工具。MicMultiImageC
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files = 'Classes/Config/**/*.{h,m,swift}', 'Classes/Controller/**/*.{h,m,swift}', 'Classes/Extension/**/*.{h,m,swift}', 'Classes/Model/**/*.{h,m,swift}', 'Classes/Tool/HXPHPicker/Core/**/*.{h,m,swift}', 'Classes/Tool/HXPHPicker/Editor/**/*.{h,m,swift}', 'Classes/View/**/*.{h,m,swift}'
+  spec.source_files = 'Classes/**/*.{h,m,swift}'
+  spec.preserve_paths = 'Classes/**/*'
 
-  spec.resources = ['Classes/SupportingFiles/MICAssets.xcassets','Classes/SupportingFiles/Localizable/*.lproj']
+  spec.resource_bundles = {
+    'MultiImageCroppingResources' => [
+      'Classes/SupportingFiles/MICAssets.xcassets',
+      'Classes/SupportingFiles/*.lproj'
+    ]
+  }
 
 
 
