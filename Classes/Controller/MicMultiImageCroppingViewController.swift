@@ -52,7 +52,7 @@ public class MicMultiImageCroppingViewController: UIViewController {
     
     public weak var delegate: MicMultiImageCroppingControllerDelegate?
     
-    convenience init(originalImgs: [UIImage], micConfiguration: MICUIConfiguration? = nil, micCropConfiguration: MICCropConfiguration? = nil, doneBlock: ((_ imgs: [UIImage]) -> Void)? = nil) {
+    public convenience init(originalImgs: [UIImage], micConfiguration: MICUIConfiguration? = nil, micCropConfiguration: MICCropConfiguration? = nil, doneBlock: ((_ imgs: [UIImage]) -> Void)? = nil) {
         self.init()
         self.originalImgs = originalImgs
         if micConfiguration != nil {
