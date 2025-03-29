@@ -10,8 +10,16 @@ The [MultiImageCropping SDK for iOS](https://github.com/Json031/MultiImageCroppi
    brew install cocoapods
    pod setup
    ```
-
-pod 'MultiImageCropping' # Full version with all features
+ ```bash
+   $iOSVersion = '11.0'
+   
+   platform :ios, $iOSVersion
+   use_frameworks!
+   
+   target 'YourProjectName' do
+      pod 'MultiImageCropping' # Full version with all features
+   end
+   ```
 
 ## 手动安装 manual install
 将Classes文件夹拽入项目中，OC项目还需要桥接
