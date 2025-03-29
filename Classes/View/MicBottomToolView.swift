@@ -46,18 +46,8 @@ public class MicBottomToolView: UIView {
         resetBtn.backgroundColor = self.micConfiguration.resetBgColor
         resetBtn.setTitleColor(self.micConfiguration.resetTitleColor, for: .normal)
         resetBtn.addTarget(self, action: #selector(resetBtnAction(sender:)), for: .touchUpInside)
+        resetBtn.isHidden = self.micConfiguration.hideResetButton
         self.addSubview(resetBtn)
-        
-        let commitBtn: UIButton = UIButton(frame: CGRect(x: resetBtn_x, y: 16 + resetBtn_h + 16, width: resetBtn_w, height: resetBtn_h))
-        commitBtn.setTitle(self.micConfiguration.commitTitle, for: .normal)
-        commitBtn.setTitleColor(self.micConfiguration.commitFontColor, for: .normal)
-        commitBtn.setBackgroundImage(UIImage.colorImage(color: self.micConfiguration.commitBgColor, width: resetBtn_w, height: resetBtn_h), for: .normal)
-        commitBtn.setTitleColor(.white, for: .normal)
-        commitBtn.titleLabel?.font = self.micConfiguration.commitTitleFont
-        commitBtn.addTarget(self, action: #selector(commitBtnAction(sender:)), for: .touchUpInside)
-        commitBtn.layer.cornerRadius = resetBtn_h / 2
-        commitBtn.clipsToBounds = true
-        self.addSubview(commitBtn)
         
         let lastPageBtn_y: CGFloat = 40
         let lastPageBtn_x: CGFloat = 16
@@ -86,6 +76,21 @@ public class MicBottomToolView: UIView {
         nextPageBtn.setTitleColor(self.micConfiguration.nextPageBtnFontColor, for: .normal)
         nextPageBtn.addTarget(self, action: #selector(nextPageBtnAction(sender:)), for: .touchUpInside)
         self.addSubview(nextPageBtn)
+        
+        var commitBtn_y: CGFloat = 16 + resetBtn_h + 16
+        if self.micConfiguration.hideResetButton {
+            commitBtn_y = lastPageBtn_y + lastPageBtn_w / 2 - resetBtn_h / 2
+        }
+        let commitBtn: UIButton = UIButton(frame: CGRect(x: resetBtn_x, y: commitBtn_y, width: resetBtn_w, height: resetBtn_h))
+        commitBtn.setTitle(self.micConfiguration.commitTitle, for: .normal)
+        commitBtn.setTitleColor(self.micConfiguration.commitFontColor, for: .normal)
+        commitBtn.setBackgroundImage(UIImage.colorImage(color: self.micConfiguration.commitBgColor, width: resetBtn_w, height: resetBtn_h), for: .normal)
+        commitBtn.setTitleColor(.white, for: .normal)
+        commitBtn.titleLabel?.font = self.micConfiguration.commitTitleFont
+        commitBtn.addTarget(self, action: #selector(commitBtnAction(sender:)), for: .touchUpInside)
+        commitBtn.layer.cornerRadius = resetBtn_h / 2
+        commitBtn.clipsToBounds = true
+        self.addSubview(commitBtn)
     }
     
     public func setPageTitle(title: String) {

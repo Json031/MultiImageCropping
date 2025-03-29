@@ -100,10 +100,9 @@ extension UIImage {
     }
     
     class func imageFromBundle(imgName: String) -> UIImage? {
-        if let bundleURL = Bundle.main.url(forResource: "MultiImageCroppingResources", withExtension: "bundle"),
-           let resourceBundle = Bundle(url: bundleURL) {
-            return UIImage(named: imgName, in: resourceBundle, compatibleWith: nil)
-        }
-        return nil
+        let bundle = Bundle(for: MicMultiImageCroppingViewController.self)
+        let bundleUrl = bundle.url(forResource: "MultiImageCroppingResources", withExtension: "bundle")!
+        let resourceBundle = Bundle(url: bundleUrl)
+        return UIImage(named: imgName, in: resourceBundle, compatibleWith: nil)
     }
 }

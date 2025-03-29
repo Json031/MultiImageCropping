@@ -143,7 +143,7 @@ public class MicMultiImageCroppingViewController: UIViewController {
         cropping.fixedRatio = self.micCropConfiguration.fixedRatio
         cropping.isRoundCrop = self.micCropConfiguration.isRoundCrop
         cropping.maskType = self.micCropConfiguration.maskType
-        cropping.corpBorderColor = self.micCropConfiguration.corpBorderColor
+        cropping.corpBorderColor = self.micConfiguration.corpBorderColor
         photoEditor.fixedCropState = true
         
         photoEditor.cropping = cropping

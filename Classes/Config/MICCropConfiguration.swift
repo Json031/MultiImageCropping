@@ -25,8 +25,7 @@ open class MICCropConfiguration {
     
     /// 裁剪时遮罩类型
     public var maskType: EditorImageResizerMaskView.MaskType
-    /// 裁剪框颜色
-    public var corpBorderColor: UIColor = .white
+    
     
     public init() {
         autoBack = true

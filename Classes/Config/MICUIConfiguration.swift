@@ -41,14 +41,21 @@ open class MICUIConfiguration {
     public var topViewBgColor: UIColor
     public var backBtnImage: UIImage?
     public var backBtnFrame: CGRect
-        
+    
+    /// 裁剪框颜色Crop frame color
+    public var corpBorderColor: UIColor
+    
+    /// 是否隐藏重置按钮Is the reset button hidden
+    public var hideResetButton: Bool
+    
     public init() {
+        hideResetButton = false
+        corpBorderColor = .white
         resetColor = UIColor.white
         resetColor = .white
         resetBgColor = .clear
         commitBgColor = .systemBlue
         commitFontColor = .white
-        let localizedString = "Mic_Done".localizableFromBundle()
 
         commitTitle = "Mic_Done".localizableFromBundle()
         commitTitleFont = .systemFont(ofSize: 16)
