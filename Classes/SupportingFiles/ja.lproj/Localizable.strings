@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  SwiftNA
+
+  Created by Rate Rebriduo on 2025/3/28.
+  Copyright © 2025 陈剑峰. All rights reserved.
+*/
+
+"Mic_Done" = "完了";
+"Mic_Reset" = "リセット";
