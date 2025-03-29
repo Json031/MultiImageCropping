@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "MultiImageCropping"
-  spec.version      = "1.0.1"
+  spec.version      = "1.0.2"
   spec.summary      = "A tool used for cropping multiple images."
 
   # This description is used to generate tags and improve search results.
@@ -82,7 +82,7 @@ MicMultiImageCropping是一个用于多张图片裁剪的工具。MicMultiImageC
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/Json031/EMultiImageCropping.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/Json031/MultiImageCropping.git", :tag => "#{spec.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
