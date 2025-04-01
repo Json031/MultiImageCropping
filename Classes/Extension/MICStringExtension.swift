@@ -8,7 +8,7 @@ import UIKit
 
 extension String {
     
-    func localizableFromBundle() -> String {
+    public func localizableFromBundle() -> String {
         let bundle = Bundle(for: MicMultiImageCroppingViewController.self)
         let bundleUrl = bundle.url(forResource: "MultiImageCroppingResources", withExtension: "bundle")!
         let resourceBundle = Bundle(url: bundleUrl)
@@ -21,7 +21,7 @@ extension String {
         return NSLocalizedString(self, tableName: nil, bundle: langBundle, value: "", comment: "")
     }
     
-    static func resourceLanguageType() -> String {
+    public static func resourceLanguageType() -> String {
         var key = "en"
         let preferredLanguage: String = Locale.preferredLanguages.first ?? "en"
         

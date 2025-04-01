@@ -11,19 +11,19 @@ open class MICCropConfiguration {
     /// 是否自动退出裁剪页面Whether to automatically exit the cropped page
     public var autoBack: Bool
     
-    /// 比例
+    /// 裁剪比例Crop Ratio
     public var aspectRatioType: EditorCropSizeConfiguration.AspectRatioType {
         didSet {
             fixedRatio = aspectRatioType != .original
             isRoundCrop = false
         }
     }
-    /// 默认固定比例
+    /// 默认固定比例Default fixed ratio
     public var fixedRatio: Bool
-    /// 圆形裁剪框
+    /// 圆形裁剪框Circular cutting frame
     public var isRoundCrop: Bool
     
-    /// 裁剪时遮罩类型
+    /// 裁剪时遮罩类型Mask type during cropping
     public var maskType: EditorImageResizerMaskView.MaskType
     
     

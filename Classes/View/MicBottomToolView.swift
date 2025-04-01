@@ -11,8 +11,6 @@ public class MicBottomToolView: UIView {
     
     public weak var delegate: MicBottomToolViewDelegate?
     
-    public var totalNums: Int = 0
-    
     private var pageLab: UILabel = UILabel()
     private var lastPageBtn: UIButton = UIButton()
     private var nextPageBtn: UIButton = UIButton()

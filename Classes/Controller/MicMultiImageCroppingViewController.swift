@@ -10,7 +10,7 @@ public class MicMultiImageCroppingViewController: UIViewController {
     private var topView: MicTopMaskView?
     private var toolView: MicBottomToolView?
     
-    private var photoEditorVCs: [PhotoEditorViewController] = [PhotoEditorViewController]()
+    private var croppingPageModels: [CroppingPageModel] = [CroppingPageModel]()
     // Calculate the x and y coordinates of the view to center it
     private let capRectWidth = micScreenWidth - 32
     private let capRectHeight = (micScreenWidth - 32) * 3 / 4
@@ -123,8 +123,8 @@ public class MicMultiImageCroppingViewController: UIViewController {
             self.cpage = self.originalImgs.count
         }
         //Find if there is already a cropped page寻找是否已有裁剪页
-        for vc in self.photoEditorVCs where vc.view.tag == self.cpage {
-            self.moveChildToFront(childViewController: vc)
+        for croppingPageModel in self.croppingPageModels where croppingPageModel.page == self.cpage {
+            self.moveChildToFront(childViewController: croppingPageModel.photoEditorVC)
             if self.toolView != nil {
                 self.view.bringSubviewToFront(self.toolView!)
             }
@@ -149,14 +149,45 @@ public class MicMultiImageCroppingViewController: UIViewController {
         photoEditor.cropping = cropping
                     
         let photoEditorVC: PhotoEditorViewController = PhotoEditorViewController(image: self.originalImgs[self.cpage - 1], config: photoEditor)
-        photoEditorVC.view.tag = self.cpage
-        self.add(childViewController: photoEditorVC)
-        self.photoEditorVCs.append(photoEditorVC)
+        let croppingPageModel: CroppingPageModel = CroppingPageModel(photoEditorVC: photoEditorVC, page: self.cpage)
+        self.add(childViewController: croppingPageModel.photoEditorVC)
+        self.croppingPageModels.append(croppingPageModel)
         if self.toolView != nil {
             self.view.bringSubviewToFront(self.toolView!)
         }
         if self.topView != nil {
             self.view.bringSubviewToFront(self.topView!)
+        }
+    }
+    
+    private func cropPage(page: Int, completion: (() -> Void)?) {
+        let group = DispatchGroup()
+        //寻找是否已有裁剪页
+        group.enter()
+        //Mark whether there are matching cropped pages
+        var matched: Bool = false
+        for croppingPageModel in self.croppingPageModels {
+            if croppingPageModel.page == page {
+                matched = true
+                croppingPageModel.photoEditorVC.imageView.cropping { result in
+                    if result != nil {
+                        if let image = UIImage(contentsOfFile: result!.editedImageURL.path) {
+                            if self.cropImgs.count > page - 1 {
+                                self.cropImgs.remove(at: page - 1)
+                                self.cropImgs.insert(image, at: page - 1)
+                            }
+                        }
+                    }
+                    group.leave()
+                }
+                break
+            }
+        }
+        if !matched {
+            group.leave()
+        }
+        group.notify(queue: DispatchQueue.main) {
+            completion?()
         }
     }
     
@@ -166,64 +197,30 @@ public class MicMultiImageCroppingViewController: UIViewController {
         if self.cpage == self.originalImgs.count {
             return
         }
-        //寻找是否已有裁剪页
-        for vc in self.photoEditorVCs where vc.view.tag == self.cpage {
-            vc.imageView.cropping { result in
-                if result != nil {
-                    if let image = UIImage(contentsOfFile: result!.editedImageURL.path) {
-                        if self.cropImgs.count > self.cpage - 1 {
-                            self.cropImgs.remove(at: self.cpage - 1)
-                            self.cropImgs.insert(image, at: self.cpage - 1)
-                        }
-                    }
-                }
-                self.switchToNextPage()
-            }
-        }
+        cropPage(page: self.cpage, completion: {
+            self.switchToNextPage()
+        })
     }
     public func lastPageAction() {
-        //寻找是否已有裁剪页
-        for vc in self.photoEditorVCs where vc.view.tag == self.cpage {
-            vc.imageView.cropping { result in
-                if result != nil {
-                    if let image = UIImage(contentsOfFile: result!.editedImageURL.path) {
-                        if self.cropImgs.count > self.cpage - 1 {
-                            self.cropImgs.remove(at: self.cpage - 1)
-                            self.cropImgs.insert(image, at: self.cpage - 1)
-                        }
-                    }
-                }
-                self.switchToLastPage()
-            }
-        }
+        cropPage(page: self.cpage, completion: {
+            self.switchToLastPage()
+        })
     }
     public func commitAction() {
         //可能当前裁剪页有拖动缩放，点击完成按钮回调到上一页之前需要再裁剪一下
         //Perhaps the current cropped page has dragging and scaling, and clicking the finish button will bring it back to the previous page before it needs to be cropped again
-        for vc in self.photoEditorVCs where vc.view.tag == self.cpage {
-            vc.imageView.cropping { result in
-                if result != nil {
-                    if let image = UIImage(contentsOfFile: result!.editedImageURL.path) {
-                        if self.cropImgs.count > self.cpage - 1 {
-                            self.cropImgs.remove(at: self.cpage - 1)
-                            self.cropImgs.insert(image, at: self.cpage - 1)
-                        }
-                    }
-                }
-                self.doneBlock?(self.cropImgs)
-                self.delegate?.micController(self, didFinishSelection: self.cropImgs)
-                if self.micCropConfiguration.autoBack {
-                    self.navigationController?.popViewController(animated: true)
-                }
+        cropPage(page: self.cpage, completion: {
+            self.doneBlock?(self.cropImgs)
+            self.delegate?.micController(self, didFinishSelection: self.cropImgs)
+            if self.micCropConfiguration.autoBack {
+                self.navigationController?.popViewController(animated: true)
             }
-        }
+        })
     }
     
     public func resetAction() {
-        for vc in self.photoEditorVCs where vc.view.tag == self.cpage {
-            vc.cropConfirmView.resetButton.isEnabled = false
-            vc.imageView.reset(true)
-            vc.cropToolView.reset(animated: true)
+        for croppingPageModel in self.croppingPageModels where croppingPageModel.page == self.cpage {
+            croppingPageModel.resetCroppingState()
             break
         }
     }

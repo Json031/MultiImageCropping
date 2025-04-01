@@ -9,7 +9,7 @@ import UIKit
 extension UIImage {
     //UIImage正中间裁剪4:3比例的图片，其中裁剪宽度与原图一样，高度根据比例计算
     //Crop the image at a 4:3 ratio in the center of UIImage, with the cropped width being the same as the original image and the height calculated based on the ratio
-    func croppedToAspectRatio(aspectRatioType: EditorCropSizeConfiguration.AspectRatioType) -> UIImage? {
+    public func croppedToAspectRatio(aspectRatioType: EditorCropSizeConfiguration.AspectRatioType) -> UIImage? {
         //原始宽高比直接返回原图
         if aspectRatioType == .original {
             return self
@@ -82,10 +82,10 @@ extension UIImage {
     ///
     /// - Parameter color: 颜色值
     /// - Returns: 图片对象
-    class func dotImageFromColor(color: UIColor) -> UIImage {
+    public class func dotImageFromColor(color: UIColor) -> UIImage {
         UIImage.colorImage(color: color, width: 1.0, height: 1.0)
     }
-    class func colorImage(color: UIColor, width: CGFloat, height: CGFloat) -> UIImage {
+    public class func colorImage(color: UIColor, width: CGFloat, height: CGFloat) -> UIImage {
         let rect: CGRect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
         UIGraphicsBeginImageContext(rect.size)
         
@@ -99,7 +99,7 @@ extension UIImage {
         return image!
     }
     
-    class func imageFromBundle(imgName: String) -> UIImage? {
+    public class func imageFromBundle(imgName: String) -> UIImage? {
         let bundle = Bundle(for: MicMultiImageCroppingViewController.self)
         let bundleUrl = bundle.url(forResource: "MultiImageCroppingResources", withExtension: "bundle")!
         let resourceBundle = Bundle(url: bundleUrl)
