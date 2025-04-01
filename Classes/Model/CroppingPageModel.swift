@@ -4,7 +4,7 @@
 //  Created by MorganChen on 2025/4/1.
 //
 
-class CroppingPageModel: NSObject {
+public class CroppingPageModel: NSObject {
     //cropping image page
     var photoEditorVC: PhotoEditorViewController
     //page number

@@ -6,8 +6,8 @@
 
 import UIKit
 
-extension UILabel {
-    public func makeAttriText(string: String, shadowBlurRadius: CGFloat, shadowOffset: CGSize, shadowColor: UIColor) {
+public extension UILabel {
+    func makeAttriText(string: String, shadowBlurRadius: CGFloat, shadowOffset: CGSize, shadowColor: UIColor) {
         let attrString: NSMutableAttributedString = NSMutableAttributedString(string: string)
         let shadow: NSShadow = NSShadow()
         shadow.shadowBlurRadius = shadowBlurRadius
