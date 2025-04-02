@@ -88,8 +88,39 @@ public class MicMultiImageCroppingViewController: UIViewController {
     
     // MARK: - private method
     private func cropImages() {
+        var width: CGFloat = 0
+        var height: CGFloat = 0
+        switch self.micCropConfiguration.aspectRatioType {
+        case .ratio_1x1:
+            width = 1
+            height = 1
+        case .ratio_2x3:
+            width = 2
+            height = 3
+        case .ratio_3x2:
+            width = 3
+            height = 2
+        case .ratio_3x4:
+            width = 3
+            height = 4
+        case .ratio_4x3:
+            width = 4
+            height = 3
+        case .ratio_9x16:
+            width = 9
+            height = 16
+        case .ratio_16x9:
+            width = 16
+            height = 9
+        case .custom(let size):
+            width = size.width
+            height = size.height
+        case .original:
+            width = 0
+            height = 0
+        }
         for originalImg in self.originalImgs {
-            if let croppedImage = originalImg.croppedToAspectRatio(aspectRatioType: self.micCropConfiguration.aspectRatioType) {
+            if let croppedImage = originalImg.croppedToAspectRatio(size: CGSize(width: width, height: height)) {
                 self.cropImgs.append(croppedImage)
             } else {
                 self.cropImgs.append(originalImg)

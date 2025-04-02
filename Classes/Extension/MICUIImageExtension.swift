@@ -9,42 +9,14 @@ import UIKit
 public extension UIImage {
     //UIImage正中间裁剪4:3比例的图片，其中裁剪宽度与原图一样，高度根据比例计算
     //Crop the image at a 4:3 ratio in the center of UIImage, with the cropped width being the same as the original image and the height calculated based on the ratio
-    func croppedToAspectRatio(aspectRatioType: EditorCropSizeConfiguration.AspectRatioType) -> UIImage? {
+    func croppedToAspectRatio(size: CGSize) -> UIImage? {
         //原始宽高比直接返回原图
-        if aspectRatioType == .original {
+        if size.width <= 0 || size.height <= 0 {
             return self
         }
-        var width: CGFloat = 1
-        var height: CGFloat = 1
-        switch aspectRatioType {
-        case .ratio_1x1:
-            width = 1
-            height = 1
-        case .ratio_2x3:
-            width = 2
-            height = 3
-        case .ratio_3x2:
-            width = 3
-            height = 2
-        case .ratio_3x4:
-            width = 3
-            height = 4
-        case .ratio_4x3:
-            width = 4
-            height = 3
-        case .ratio_9x16:
-            width = 9
-            height = 16
-        case .ratio_16x9:
-            width = 16
-            height = 9
-        case .custom(let size):
-            width = size.width
-            height = size.height
-        default:
-            width = 1
-            height = 1
-        }
+        var width: CGFloat = size.width
+        var height: CGFloat = size.height
+        
         // 获取图片的原始尺寸
         // Obtain the original size of the image
         let originalSize = self.size
@@ -99,8 +71,7 @@ public extension UIImage {
         return image!
     }
     
-    class func imageFromBundle(imgName: String) -> UIImage? {
-        let bundle = Bundle(for: MicMultiImageCroppingViewController.self)
+    class func imageFromBundle(bundle: Bundle, imgName: String) -> UIImage? {
         let bundleUrl = bundle.url(forResource: "MultiImageCroppingResources", withExtension: "bundle")!
         let resourceBundle = Bundle(url: bundleUrl)
         return UIImage(named: imgName, in: resourceBundle, compatibleWith: nil)

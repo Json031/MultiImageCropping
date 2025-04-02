@@ -48,6 +48,8 @@ open class MICUIConfiguration {
     /// 是否隐藏重置按钮Is the reset button hidden
     public var hideResetButton: Bool
     
+    public let bundle = Bundle(for: MICUIConfiguration.self)
+    
     public init() {
         hideResetButton = false
         corpBorderColor = .white
@@ -57,22 +59,22 @@ open class MICUIConfiguration {
         commitBgColor = .systemBlue
         commitFontColor = .white
 
-        commitTitle = "Mic_Done".localizableFromBundle()
+        commitTitle = "Mic_Done".localizableFromBundle(aClass: (MICUIConfiguration.self))
         commitTitleFont = .systemFont(ofSize: 16)
         resetFont = .systemFont(ofSize: 15)
-        resetTitle = "Mic_Reset".localizableFromBundle()
+        resetTitle = "Mic_Reset".localizableFromBundle(aClass: MICUIConfiguration.self)
         resetTitleColor = .white
         nextPageBtnFont = .systemFont(ofSize: 15)
-        nextPageBtnImage = UIImage.imageFromBundle(imgName: "nextone")
+        nextPageBtnImage = UIImage.imageFromBundle(bundle: bundle, imgName: "nextone")
         lastPageBtnFont = .systemFont(ofSize: 15)
-        lastPageBtnImage = UIImage.imageFromBundle(imgName: "lastone")
+        lastPageBtnImage = UIImage.imageFromBundle(bundle: bundle, imgName: "lastone")
         
         nextPageBtnFontColor = .white
         lastPageBtnFontColor = .white
         pageFontSize = 18
         pageTitleColor = .white
         backBtnFrame = CGRect(x: 16, y: micStatusBar_Height(), width: 35, height: 35)
-        backBtnImage = UIImage.imageFromBundle(imgName: "turnback")
+        backBtnImage = UIImage.imageFromBundle(bundle: bundle, imgName: "turnback")
         toolViewBgColor = .init(hex: "#22222A")
         topViewBgColor = .clear
     }

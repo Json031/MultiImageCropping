@@ -8,8 +8,8 @@ import UIKit
 
 public extension String {
     
-    func localizableFromBundle() -> String {
-        let bundle = Bundle(for: MicMultiImageCroppingViewController.self)
+    func localizableFromBundle(aClass: AnyClass) -> String {
+        let bundle = Bundle(for: aClass)
         let bundleUrl = bundle.url(forResource: "MultiImageCroppingResources", withExtension: "bundle")!
         let resourceBundle = Bundle(url: bundleUrl)
         guard let jaUrl = resourceBundle?.url(forResource: String.resourceLanguageType(), withExtension: "lproj") else {
