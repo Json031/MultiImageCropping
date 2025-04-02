@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "MultiImageCropping"
-  spec.version      = "1.0.15"
+  spec.version      = "1.0.16"
   spec.summary      = "A tool used for cropping multiple images."
 
   # This description is used to generate tags and improve search results.
@@ -93,9 +93,6 @@ MicMultiImageCropping是一个用于多张图片裁剪的工具。MicMultiImageC
   #  Not including the public_header_files will make all headers public.
   #
 
-
-  spec.preserve_paths = 'Classes/**/*'
-
 spec.subspec 'Tool' do |ss|
   ss.source_files = 'Classes/Tool/**/*.{h,m,swift}'
 end
@@ -106,27 +103,27 @@ end
 
 spec.subspec 'Config' do |ss|
   ss.source_files = 'Classes/Config/**/*.{h,m,swift}'
-  ss.dependency 'Tool'
-  ss.dependency 'Extension'
+  ss.dependency 'MultiImageCropping/Tool'
+  ss.dependency 'MultiImageCropping/Extension'
 end
 
 spec.subspec 'Model' do |ss|
   ss.source_files = 'Classes/Model/**/*.{h,m,swift}'
-  ss.dependency 'Tool'
+  ss.dependency 'MultiImageCropping/Tool'
 end
 
 spec.subspec 'View' do |ss|
   ss.source_files = 'Classes/View/**/*.{h,m,swift}'
-  ss.dependency 'Config'
+  ss.dependency 'MultiImageCropping/Config'
 end
 
 spec.subspec 'Controller' do |ss|
   ss.source_files = 'Classes/Controller/**/*.{h,m,swift}'
-  ss.dependency 'View'
-  ss.dependency 'Model'
-  ss.dependency 'Config'
-  ss.dependency 'Extension'
-  ss.dependency 'Tool'
+  ss.dependency 'MultiImageCropping/View'
+  ss.dependency 'MultiImageCropping/Model'
+  ss.dependency 'MultiImageCropping/Config'
+  ss.dependency 'MultiImageCropping/Extension'
+  ss.dependency 'MultiImageCropping/Tool'
 end
 
   spec.resource_bundles = {
