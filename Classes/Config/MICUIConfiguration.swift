@@ -49,6 +49,8 @@ open class MICUIConfiguration {
     public var hideResetButton: Bool
     
     public let bundle = Bundle(for: MICUIConfiguration.self)
+    //Status bar style, font color
+    public let preferredStatusBarStyle: UIStatusBarStyle
     
     public init() {
         hideResetButton = false
@@ -73,9 +75,10 @@ open class MICUIConfiguration {
         lastPageBtnFontColor = .white
         pageFontSize = 18
         pageTitleColor = .white
-        backBtnFrame = CGRect(x: 16, y: micStatusBar_Height(), width: 35, height: 35)
+        backBtnFrame = CGRect(x: 16, y: 0, width: micStatusBar_Height(), height: micStatusBar_Height())
         backBtnImage = UIImage.imageFromBundle(bundle: bundle, imgName: "turnback")
         toolViewBgColor = .init(hex: "#22222A")
         topViewBgColor = .clear
+        preferredStatusBarStyle = .lightContent
     }
 }

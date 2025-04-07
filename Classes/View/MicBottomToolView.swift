@@ -14,6 +14,7 @@ public class MicBottomToolView: UIView {
     private var pageLab: UILabel = UILabel()
     private var lastPageBtn: UIButton = UIButton()
     private var nextPageBtn: UIButton = UIButton()
+    private var commitBtn: UIButton = UIButton()
     
     ///adImage 广告图
     init(frame: CGRect = .zero, micConfiguration: MICUIConfiguration) {
@@ -50,13 +51,13 @@ public class MicBottomToolView: UIView {
         let lastPageBtn_y: CGFloat = 40
         let lastPageBtn_x: CGFloat = 16
         let lastPageBtn_w: CGFloat = 45
-        let lastPageBtn: UIButton = UIButton(frame: CGRect(x: lastPageBtn_x, y: lastPageBtn_y, width: lastPageBtn_w, height: lastPageBtn_w))
-        lastPageBtn.setImage(self.micConfiguration.lastPageBtnImage, for: .normal)
-        lastPageBtn.imageView?.contentMode = .scaleAspectFit
-        lastPageBtn.titleLabel?.font = self.micConfiguration.lastPageBtnFont
-        lastPageBtn.setTitleColor(self.micConfiguration.lastPageBtnFontColor, for: .normal)
-        lastPageBtn.addTarget(self, action: #selector(lastPageBtnAction(sender:)), for: .touchUpInside)
-        self.addSubview(lastPageBtn)
+        self.lastPageBtn = UIButton(frame: CGRect(x: lastPageBtn_x, y: lastPageBtn_y, width: lastPageBtn_w, height: lastPageBtn_w))
+        self.lastPageBtn.setImage(self.micConfiguration.lastPageBtnImage, for: .normal)
+        self.lastPageBtn.imageView?.contentMode = .scaleAspectFit
+        self.lastPageBtn.titleLabel?.font = self.micConfiguration.lastPageBtnFont
+        self.lastPageBtn.setTitleColor(self.micConfiguration.lastPageBtnFontColor, for: .normal)
+        self.lastPageBtn.addTarget(self, action: #selector(lastPageBtnAction(sender:)), for: .touchUpInside)
+        self.addSubview(self.lastPageBtn)
         
         let pageLab_x: CGFloat = lastPageBtn_x + lastPageBtn_w + 32
         let pageLab: UILabel = UILabel(frame: CGRect(x: pageLab_x, y: lastPageBtn_y, width: lastPageBtn_w, height: lastPageBtn_w))
@@ -67,32 +68,56 @@ public class MicBottomToolView: UIView {
         self.pageLab = pageLab
         pageLab.makeAttriText(string: pageLab.text ?? "", shadowBlurRadius: 2, shadowOffset: CGSize(width: 0, height: 1), shadowColor: UIColor.init(white: 0.0, alpha: 0.3))
         
-        let nextPageBtn: UIButton = UIButton(frame: CGRect(x: pageLab_x + lastPageBtn_w + 32.0, y: lastPageBtn_y, width: lastPageBtn_w, height: lastPageBtn_w))
-        nextPageBtn.setImage(self.micConfiguration.nextPageBtnImage, for: .normal)
-        nextPageBtn.imageView?.contentMode = .scaleAspectFit
-        nextPageBtn.titleLabel?.font = self.micConfiguration.nextPageBtnFont
-        nextPageBtn.setTitleColor(self.micConfiguration.nextPageBtnFontColor, for: .normal)
-        nextPageBtn.addTarget(self, action: #selector(nextPageBtnAction(sender:)), for: .touchUpInside)
-        self.addSubview(nextPageBtn)
+        self.nextPageBtn = UIButton(frame: CGRect(x: pageLab_x + lastPageBtn_w + 32.0, y: lastPageBtn_y, width: lastPageBtn_w, height: lastPageBtn_w))
+        self.nextPageBtn.setImage(self.micConfiguration.nextPageBtnImage, for: .normal)
+        self.nextPageBtn.imageView?.contentMode = .scaleAspectFit
+        self.nextPageBtn.titleLabel?.font = self.micConfiguration.nextPageBtnFont
+        self.nextPageBtn.setTitleColor(self.micConfiguration.nextPageBtnFontColor, for: .normal)
+        self.nextPageBtn.addTarget(self, action: #selector(nextPageBtnAction(sender:)), for: .touchUpInside)
+        self.addSubview(self.nextPageBtn)
         
         var commitBtn_y: CGFloat = 16 + resetBtn_h + 16
         if self.micConfiguration.hideResetButton {
             commitBtn_y = lastPageBtn_y + lastPageBtn_w / 2 - resetBtn_h / 2
         }
-        let commitBtn: UIButton = UIButton(frame: CGRect(x: resetBtn_x, y: commitBtn_y, width: resetBtn_w, height: resetBtn_h))
-        commitBtn.setTitle(self.micConfiguration.commitTitle, for: .normal)
-        commitBtn.setTitleColor(self.micConfiguration.commitFontColor, for: .normal)
-        commitBtn.setBackgroundImage(UIImage.colorImage(color: self.micConfiguration.commitBgColor, width: resetBtn_w, height: resetBtn_h), for: .normal)
-        commitBtn.setTitleColor(.white, for: .normal)
-        commitBtn.titleLabel?.font = self.micConfiguration.commitTitleFont
-        commitBtn.addTarget(self, action: #selector(commitBtnAction(sender:)), for: .touchUpInside)
-        commitBtn.layer.cornerRadius = resetBtn_h / 2
-        commitBtn.clipsToBounds = true
-        self.addSubview(commitBtn)
+        self.commitBtn = UIButton(frame: CGRect(x: resetBtn_x, y: commitBtn_y, width: resetBtn_w, height: resetBtn_h))
+        self.commitBtn.setTitle(self.micConfiguration.commitTitle, for: .normal)
+        self.commitBtn.setTitleColor(self.micConfiguration.commitFontColor, for: .normal)
+        self.commitBtn.setBackgroundImage(UIImage.colorImage(color: self.micConfiguration.commitBgColor, width: resetBtn_w, height: resetBtn_h), for: .normal)
+        self.commitBtn.setTitleColor(.white, for: .normal)
+        self.commitBtn.titleLabel?.font = self.micConfiguration.commitTitleFont
+        self.commitBtn.addTarget(self, action: #selector(commitBtnAction(sender:)), for: .touchUpInside)
+        self.commitBtn.layer.cornerRadius = resetBtn_h / 2
+        self.commitBtn.clipsToBounds = true
+        self.addSubview(self.commitBtn)
     }
     
     public func setPageTitle(title: String) {
         pageLab.text = title
+    }
+    
+    /// Set lastbtn unavailable when on the first page
+    /// - Parameter isEnabled: isEnabled
+    public func isLastEnable(isEnabled: Bool = true) {
+        self.lastPageBtn.isEnabled = isEnabled
+    }
+    
+    /// Set nextbtn unavailable when on the first page
+    /// - Parameter isEnabled: isEnabled
+    public func isNextEnable(isEnabled: Bool = true) {
+        self.nextPageBtn.isEnabled = isEnabled
+    }
+    
+    public func setLastButtonImage(image: UIImage?) {
+        self.lastPageBtn.setImage(image, for: .normal)
+    }
+    
+    public func setNextButtonImage(image: UIImage?) {
+        self.nextPageBtn.setImage(image, for: .normal)
+    }
+    
+    public func isCommitEnable(isEnabled: Bool = true) {
+        self.commitBtn.isEnabled = isEnabled
     }
     
     // MARK: - button action

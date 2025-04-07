@@ -35,18 +35,28 @@ public class MicMultiImageCroppingViewController: UIViewController {
     //页控制器（小圆点）Page controller (small dots)
     private var cpage: Int = 1 {
         didSet {
+            if self.micCropConfiguration.autoEnablePagingBtn {
+                self.toolView?.isLastEnable(isEnabled: self.cpage != 1)
+                self.toolView?.isNextEnable(isEnabled: self.cpage != self.originalImgs.count)
+            }
             self.toolView?.setPageTitle(title: "\(self.cpage)/\(self.originalImgs.count)")
         }
     }
     
+    //Original image
     private var originalImgs: [UIImage] = [UIImage]()
+    //Trimmed image
     private var cropImgs: [UIImage] = [UIImage]()
     private var doneBlock: ((_ imgs: [UIImage]) -> Void)? = nil
     private let toolView_h: CGFloat = 109
-    public override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
     
+    //Status bar style, font color
+    public override var preferredStatusBarStyle: UIStatusBarStyle {
+        return self.micConfiguration.preferredStatusBarStyle
+    }
+    public override var prefersStatusBarHidden: Bool {
+        return true
+    }
     private var micConfiguration: MICUIConfiguration = MICUIConfiguration()
     private var micCropConfiguration: MICCropConfiguration = MICCropConfiguration()
     
@@ -119,6 +129,7 @@ public class MicMultiImageCroppingViewController: UIViewController {
             width = 0
             height = 0
         }
+        //Traverse all images and automatically crop the middle area of the image according to the cropping ratio
         for originalImg in self.originalImgs {
             if let croppedImage = originalImg.croppedToAspectRatio(size: CGSize(width: width, height: height)) {
                 self.cropImgs.append(croppedImage)
@@ -128,7 +139,7 @@ public class MicMultiImageCroppingViewController: UIViewController {
         }
     }
     private func configView() {
-        let topView: MicTopMaskView = MicTopMaskView(frame: CGRect(x: 0, y: 0, width: micScreenWidth, height: micNavigationBarHeight), micConfiguration: self.micConfiguration)
+        let topView: MicTopMaskView = MicTopMaskView(frame: CGRect(x: 0, y: 0, width: micScreenWidth, height: micStatusBar_Height()), micConfiguration: self.micConfiguration)
         topView.delegate = self
         self.view.addSubview(topView)
         self.topView = topView
@@ -242,7 +253,7 @@ public class MicMultiImageCroppingViewController: UIViewController {
         //Perhaps the current cropped page has dragging and scaling, and clicking the finish button will bring it back to the previous page before it needs to be cropped again
         cropPage(page: self.cpage, completion: {
             self.doneBlock?(self.cropImgs)
-            self.delegate?.micController(self, didFinishSelection: self.cropImgs)
+            self.delegate?.micController?(self, didFinishSelection: self.cropImgs)
             if self.micCropConfiguration.autoBack {
                 self.navigationController?.popViewController(animated: true)
             }
@@ -263,7 +274,7 @@ public class MicMultiImageCroppingViewController: UIViewController {
         if self.cpage == self.originalImgs.count {
             return
         }
-        delegate?.micController(self, nextPage: self.cpage)
+        delegate?.micController?(self, nextPage: self.cpage)
         self.cpage += 1
         editImageAtPage()
     }
@@ -275,13 +286,13 @@ public class MicMultiImageCroppingViewController: UIViewController {
         if self.cpage == 1 {
             return
         }
-        delegate?.micController(self, lastPage: self.cpage)
+        delegate?.micController?(self, lastPage: self.cpage)
         self.cpage -= 1
         editImageAtPage()
     }
     
     @objc func back() {
-        delegate?.micController(didCancel: self)
+        delegate?.micController?(didCancel: self)
         if self.micCropConfiguration.autoBack {
             self.navigationController?.popViewController(animated: true)
         }

@@ -8,6 +8,9 @@ import UIKit
 
 public extension String {
     
+    /// Local multilingual internationalization
+    /// - Parameter aClass: Bundle class
+    /// - Returns: localizabled string
     func localizableFromBundle(aClass: AnyClass) -> String {
         let bundle = Bundle(for: aClass)
         let bundleUrl = bundle.url(forResource: "MultiImageCroppingResources", withExtension: "bundle")!
@@ -21,6 +24,7 @@ public extension String {
         return NSLocalizedString(self, tableName: nil, bundle: langBundle, value: "", comment: "")
     }
     
+    //get resource language type
     static func resourceLanguageType() -> String {
         var key = "en"
         let preferredLanguage: String = Locale.preferredLanguages.first ?? "en"

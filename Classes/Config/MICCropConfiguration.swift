@@ -10,6 +10,8 @@ open class MICCropConfiguration {
     
     /// 是否自动退出裁剪页面Whether to automatically exit the cropped page
     public var autoBack: Bool
+    ///是否自动设置分页按钮可用状态Whether to automatically set the available status of the paging button
+    public var autoEnablePagingBtn: Bool
     
     /// 裁剪比例Crop Ratio
     public var aspectRatioType: EditorCropSizeConfiguration.AspectRatioType {
@@ -28,6 +30,7 @@ open class MICCropConfiguration {
     
     
     public init() {
+        autoEnablePagingBtn = true
         autoBack = true
         isRoundCrop = false
         aspectRatioType = .original

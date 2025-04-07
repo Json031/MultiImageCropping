@@ -6,20 +6,20 @@
 
 import UIKit
 
-public protocol MicMultiImageCroppingControllerDelegate: AnyObject {
+@objc public protocol MicMultiImageCroppingControllerDelegate: AnyObject {
     
     /// 选择完成之后调用Call after selection
     /// - Parameters:
     ///   - multiImageCroppingController: Controller控制器
     ///   - result: 裁剪结果Crop result
-    func micController(
+    @objc optional func micController(
         _ micMultiImageCroppingController: MicMultiImageCroppingViewController,
         didFinishSelection result: [UIImage]
     )
     
     /// 点击取消时调用Call when clicking cancel
     ///   - multiImageCroppingController: Controller控制器
-    func micController(
+    @objc optional func micController(
         didCancel micMultiImageCroppingController: MicMultiImageCroppingViewController
     )
     
@@ -27,7 +27,7 @@ public protocol MicMultiImageCroppingControllerDelegate: AnyObject {
     /// - Parameters:
     ///   - multiImageCroppingController: Controller控制器
     ///   - pageIndex: 当前页码
-    func micController(
+    @objc optional func micController(
         _ micMultiImageCroppingController: MicMultiImageCroppingViewController,
         nextPage pageIndex: Int
     )
@@ -36,7 +36,7 @@ public protocol MicMultiImageCroppingControllerDelegate: AnyObject {
     /// - Parameters:
     ///   - multiImageCroppingController: Controller控制器
     ///   - pageIndex: 当前页码
-    func micController(
+    @objc optional func micController(
         _ micMultiImageCroppingController: MicMultiImageCroppingViewController,
         lastPage pageIndex: Int
     )
