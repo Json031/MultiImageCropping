@@ -3,6 +3,7 @@ MicMultiImageCropping是一个用于多张图片裁剪的工具。
 MicMultiImageCrop is a tool used for cropping multiple images.
 
 # Installation 安装:
+* 最新版本 Latest Version: [![CocoaPods](https://img.shields.io/cocoapods/v/MultiImageCropping.svg)](https://cocoapods.org/pods/MultiImageCropping)
 
 ## CocoaPods
 The [MultiImageCropping SDK for iOS](https://github.com/Json031/MultiImageCropping) is available through [CocoaPods](http://cocoapods.org). If CocoaPods is not installed, install it using the following command. Note that Ruby will also be installed, as it is a dependency of Cocoapods.
