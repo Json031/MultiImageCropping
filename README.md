@@ -1,6 +1,6 @@
 # MultiImageCropping
-MicMultiImageCropping是一个用于多张图片裁剪的工具。
-<br>MicMultiImageCrop is a tool used for cropping multiple images.
+MultiImageCropping是一个多图裁剪的开源项目。
+<br>MultiImageCrop is an open-source project for multi image cropping.
 
 # Installation 安装:
 * 最新版本 Latest Version: [![CocoaPods](https://img.shields.io/cocoapods/v/MultiImageCropping.svg)](https://cocoapods.org/pods/MultiImageCropping)
