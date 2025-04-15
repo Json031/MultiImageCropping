@@ -1,6 +1,6 @@
 # MultiImageCropping
-MultiImageCropping是一个多图裁剪的开源项目。
-<br>MultiImageCrop is an open-source project for multi image cropping.
+MultiImageCropping是一个通过分页处理来实现多图裁剪的开源项目，适用于发布多图帖子或博文或多图短视频的场景，实现引导用户将其选取的多张图片裁剪为规定比例的尺寸，默认裁剪图片中央区域可移动调整中央区域，使多图短视频更加规范和美观。
+<br>MultiImageCrop is an open-source project that uses pagination to achieve multi image cropping. It is suitable for scenarios where users publish multi image posts, blog posts, or short videos. It guides users to crop multiple selected images to a specified size ratio. By default, the central area of the cropped image can be adjusted to make the multi image short video more standardized and beautiful.
 
 # Installation 安装:
 * 最新版本 Latest Version: [![CocoaPods](https://img.shields.io/cocoapods/v/MultiImageCropping.svg)](https://cocoapods.org/pods/MultiImageCropping)
