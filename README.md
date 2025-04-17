@@ -33,7 +33,7 @@ The [MultiImageCropping SDK for iOS](https://github.com/Json031/MultiImageCroppi
 https://github.com/user-attachments/assets/a9a8d441-4c50-4d03-89d8-063535480ee1
 
 
-## 代码结构
+# 代码结构
 
 ### 1. 主要属性
 - `originalImgs: [UIImage]`：原始图片数组。
@@ -58,7 +58,7 @@ https://github.com/user-attachments/assets/a9a8d441-4c50-4d03-89d8-063535480ee1
 - `micController(_:nextPage:)` / `micController(_:lastPage:)`：翻页回调。
 - `micController(didCancel:)`：用户取消裁剪时的回调。
 
-## 使用示例
+# 使用示例
 ```swift
 let images: [UIImage] = [...]
 let cropConfig = MICCropConfiguration()
