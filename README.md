@@ -1,9 +1,13 @@
 # MultiImageCropping
+[![CocoaPods](https://img.shields.io/cocoapods/v/MultiImageCropping.svg)](https://cocoapods.org/pods/MultiImageCropping)
+![Swift 5](https://img.shields.io/badge/Swift-5.0-orange.svg)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Json031/MultiImageCropping/blob/main/LICENSE)
+<br>
 MultiImageCropping是一个通过分页处理来实现多图裁剪的开源项目，适用于发布多图帖子或博文或多图短视频的场景，实现引导用户将其选取的多张图片裁剪为规定比例的尺寸，默认裁剪图片中央区域，可移动调整中央区域，使多图短视频更加规范和美观。
 <br>MultiImageCrop is an open-source project that uses pagination to achieve multi image cropping. It is suitable for scenarios where users publish multi image posts, blog posts, or short videos. It guides users to crop multiple selected images to a specified size ratio. By default, the central area of the image is cropped and can be adjusted by moving it, making multi image short videos more standardized and beautiful.
 
 # Installation 安装:
-* 最新版本 Latest Version: [![CocoaPods](https://img.shields.io/cocoapods/v/MultiImageCropping.svg)](https://cocoapods.org/pods/MultiImageCropping)
+* 最新版本 Latest Version: 
 
 ## CocoaPods
 The [MultiImageCropping SDK for iOS](https://github.com/Json031/MultiImageCropping) is available through [CocoaPods](http://cocoapods.org). If CocoaPods is not installed, install it using the following command. Note that Ruby will also be installed, as it is a dependency of Cocoapods.
