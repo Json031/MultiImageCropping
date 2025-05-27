@@ -32,9 +32,11 @@ The [MultiImageCropping SDK for iOS](https://github.com/Json031/MultiImageCroppi
 
 ## 演示效果 Demonstrate
 
-| 多图裁剪分页器 Multi Image Crop Pager | 
-| ---- |
-| <a href="https://github.com/user-attachments/assets/a9a8d441-4c50-4d03-89d8-063535480ee1"><img src="https://github.com/user-attachments/assets/200ba587-bd16-42b9-977b-f8966fb4b7f6?raw=true" width="300"/></a> |
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/93262aa4-1023-485d-af08-37a76338b0c0" width="300" style="border: 2px solid blue;" />
+</p>
+
+https://github.com/user-attachments/assets/a9a8d441-4c50-4d03-89d8-063535480ee1
 
 # 代码结构
 
