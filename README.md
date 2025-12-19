@@ -31,10 +31,7 @@ The [MultiImageCropping SDK for iOS](https://github.com/Json031/MultiImageCroppi
 <br>Drag the Classes folder into the project, OC project still needs bridging
 
 ## 演示效果 Demonstrate
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/93262aa4-1023-485d-af08-37a76338b0c0" width="300" style="border: 2px solid blue;" />
-</p>
+<img width="220" height="440" alt="screenshot-1" src="https://github.com/user-attachments/assets/93262aa4-1023-485d-af08-37a76338b0c0" style="border: 2px solid blue;" />
 
 https://github.com/user-attachments/assets/a9a8d441-4c50-4d03-89d8-063535480ee1
 
